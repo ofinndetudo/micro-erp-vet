@@ -60,13 +60,13 @@ Certifique-se de ter o **Python** instalado em sua máquina.
 pip install -r requirements.txt
 ```
 
-##Inicie o servidor de desenvolvimento:
+## Inicie o servidor de desenvolvimento:
 
 ```Bash
 uvicorn aplica_o.main:app --reload
 ```
 
-##Acesse a documentação interativa:
+## Acesse a documentação interativa:
 ```
 http://127.0.0.1:8000/docs
 ```
