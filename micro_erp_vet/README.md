@@ -71,9 +71,9 @@ uvicorn aplica_o.main:app --reload
 http://127.0.0.1:8000/docs
 ```
 
-##Tecnologias Utilizadas
-**FastAPI
-**SQLAlchemy
-**Pydantic
-**SQLite
-**FPDF (Geração de relatórios)
+# Tecnologias Utilizadas
+**FastAPI**
+**SQLAlchemy**
+**Pydantic**
+**SQLite**
+**FPDF (Geração de relatórios)**
