@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from .database import engine, Base
-from .routes import cadastros # Vamos criar este a seguir
+from .routes import cadastros, vendas, financeiro
 
 # Cria as tabelas no banco de dados se elas não existirem
 Base.metadata.create_all(bind=engine)
