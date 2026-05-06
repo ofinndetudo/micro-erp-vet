@@ -13,7 +13,7 @@ def registrar_venda(venda: schemas.VendaCreate, db: Session = Depends(get_db)):
     if not produto or produto.quantidade_estoque < venda.quantidade:
         raise HTTPException(status_code=400, detail="Estoque insuficiente ou produto inativo")
     
-    # RF03: Baixa automática de estoque[cite: 1]
+    # RF03: Baixa automática de estoque
     produto.quantidade_estoque -= venda.quantidade
     
     nova_venda = models.Venda(**venda.dict())
