@@ -1,0 +1,13 @@
+micro_erp_vet/
+└── aplicacao/
+    ├── routes/
+    │   ├── cadastros.py
+    │   ├── clinica.py
+    │   ├── compras.py      <-- ADICIONAR (Sprint 2)
+    │   ├── vendas.py       <-- ADICIONAR (Sprint 3)
+    │   └── financeiro.py   <-- RENOMEAR (Antigo financiamento.py)
+    ├── reports/            <-- ADICIONAR (Para o PDF da Sprint 3)
+    │   └── gerador_pdf.py
+    ├── models.py           # Garanta que tenha as tabelas de PedidoCompra e Venda
+    ├── services.py         # Garanta que tenha o cálculo de Custo Médio
+    └── ...

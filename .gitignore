@@ -1,0 +1,15 @@
+# Ambientes virtuais
+venv/
+.venv/
+env/
+
+# Banco de dados (não envie o arquivo .db local)
+*.db
+*.sqlite3
+
+# Configurações sensíveis (Suas senhas e chaves)
+.env
+
+# Cache do Python
+__pycache__/
+*.py[cod]

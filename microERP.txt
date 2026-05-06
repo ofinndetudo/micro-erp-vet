@@ -1,0 +1,27 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+#
+# Initial commit
+#
+# Changes to be committed:
+#	new file:   .gitignore
+#	new file:   micro_erp_vet/README.md
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/__init__.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/auth.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/database.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/main.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/models.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/reports/gerador_pdf.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/routes/cadastros.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/routes/clinica.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/routes/compras.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/routes/financeiro.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/routes/vendas.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/schemas.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/services.py"
+#	new file:   "micro_erp_vet/aplica\303\247\303\243o/utils.py"
+#	new file:   micro_erp_vet/requirements.txt
+#
