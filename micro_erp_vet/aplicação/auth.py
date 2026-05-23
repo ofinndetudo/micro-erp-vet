@@ -28,3 +28,11 @@ def get_usuario_atual(token: str = Depends(oauth2_scheme), db: Session = Depends
             headers={"WWW-Authenticate": "Bearer"},
         )
     return usuario
+
+def verificar_permissao_adm(usuario: models.Usuario):
+    if usuario.perfil != "ADMIN":
+        raise HTTPException(
+            status_code = status.HTTP_403_FORBIDDEN,
+            detail = "Acesso restrito a administradores."
+        )
+    return True  
