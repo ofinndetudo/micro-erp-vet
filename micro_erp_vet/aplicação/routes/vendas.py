@@ -20,3 +20,15 @@ def registrar_venda(venda: schemas.VendaCreate, db: Session = Depends(get_db)):
     db.add(nova_venda)
     db.commit()
     return {"status": "Venda realizada e estoque atualizado"}
+
+    #automatização sprint 4
+    novo_recebivel = models.Financeiro(
+        tipo = "RECEBER",
+        valor = venda_data.valor_total,
+        entidade_id = venda_data.cliente_id,
+        data_vencimento = date.today(),
+        status = "ABERTO",
+        id_plano_contas = 115 #ID dos Clientes no plano de contas
+    )
+    db.add(novo_recebivel)
+    db.commit()

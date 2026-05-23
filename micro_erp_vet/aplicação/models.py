@@ -63,6 +63,7 @@ class Financeiro(Base):
     data_vencimento = Column(DateTime)
     # Vinculo com o Plano de Contas para o Balanço Patrimonial futuro
     id_plano_contas = Column(Integer, ForeignKey("plano_contas.id"))
+    entidade_id = Column(Integer, ForeignKey("entidades.id"))
 
 # Tabela para registrar o Pedido de Compra (RF06)
 class PedidoCompra(Base):
