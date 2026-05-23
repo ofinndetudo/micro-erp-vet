@@ -70,11 +70,3 @@ def atualizar_estoque_e_custo(db, id_produto, qtd_nova, preco_compra):
     produto.estoque_atual = novo_saldo
     
     return produto
-
-# Rota que o sistema usa para confirmar o recebimento (RF07)
-@router.post("/confirmar-recebimento/{pedido_id}")
-def confirmar_pedido(pedido_id: int, db: Session = Depends(get_db)):
-    # 1. Busca os itens do pedido
-    # 2. Para cada item, chama a função do services.py
-    # 3. Gera o rastro (log) de movimentação (RF11)
-    pass

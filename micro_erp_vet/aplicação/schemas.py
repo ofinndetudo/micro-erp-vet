@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional, List
+from datetime import datetime
 
 # Esquemas para Entidades (Clientes/Fornecedores)
 class EntidadeBase(BaseModel):
@@ -13,7 +14,6 @@ class EntidadeCreate(EntidadeBase):
 class Entidade(EntidadeBase):
     id: int
     ativo: bool
-
     class Config:
         from_attributes = True
 
@@ -23,7 +23,8 @@ class ProdutoBase(BaseModel):
     sku: str # SKU único
     preco_custo: float = Field(gt=0)
     preco_venda: float = Field(gt=0)
-    quantidade_estoque: int
+    quantidade_estoque: int = Field(ge=0) #permite que o estoque chegue a zero
+    estoque_minimo = int = 5
 
 class ProdutoCreate(ProdutoBase):
     pass
@@ -31,7 +32,24 @@ class ProdutoCreate(ProdutoBase):
 class Produto(ProdutoBase):
     id: int
     ativo: bool
+    class Config:
+        from_attributes = True
 
+# Esquemas para Financeiro (Sprint 3)
+class FinanceiroBase(BaseModel):
+    descricao: str
+    valor: float = Field(ge=0)
+    tipo: str # 'RECEITA' ou 'DESPESA'
+    status: str
+    plano_contas_id: int # Vínculo com a árvore de contas[cite: 1]
+    data_vencimento: Optional[datetime] = None
+
+class Financeiro(FinanceiroBase):
+    pass
+
+class Financeiro(FinanceiroBase):
+    id: int
+    data_criacao: datetime
     class Config:
         from_attributes = True
 
@@ -40,16 +58,3 @@ class VendaCreate(BaseModel):
     produto_id: int
     quantidade: int = Field(gt=0)
     valor_total: float
-
-# Esquemas para Financeiro (Sprint 3)
-class FinanceiroBase(BaseModel):
-    descricao: str
-    valor: float
-    tipo: str # 'RECEITA' ou 'DESPESA'
-    plano_contas_id: int # Vínculo com a árvore de contas[cite: 1]
-
-class Financeiro(FinanceiroBase):
-    id: int
-
-    class Config:
-        from_attributes = True

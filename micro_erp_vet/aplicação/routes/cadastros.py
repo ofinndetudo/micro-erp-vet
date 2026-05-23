@@ -11,6 +11,15 @@ def criar_entidade(entidade: schemas.EntidadeCreate, db: Session = Depends(get_d
     if not utils.validar_documento(entidade.documento):
         raise HTTPException(status_code=400, detail="Documento CPF/CNPJ inválido")
     
+    documento_limpo = utils.limpar_documento(entidade.documento)
+
+    existente = db.query(models.Entidade).filter(models.Entidade.documento == documento_limpo).first()
+    if existente:
+        rais HTTPException(status_code = 400, detail = "Este CPF/CNPJ já está cadastrado")
+
+    dados_entidade = entidade.model_dump()
+    dados_entidade['documento'] = documento_limpo
+
     nova_entidade = models.Entidade(**entidade.dict(), ativo=True)
     db.add(nova_entidade)
     db.commit()

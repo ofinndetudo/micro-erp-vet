@@ -4,7 +4,7 @@ from database import Base
 import datetime
 
 #tabela de usuários para o sistema de login (RF03)
-class Usuario(base):
+class Usuario(Base):
     __tablename__ = "usuarios"
     id = Column(Integer, primary_key=True, index=True)
     nome = Column(String)
@@ -41,8 +41,8 @@ class Produto(Base):
     sku = Column(String, unique=True) # Código único exigido no trabalho
     preco_custo = Column(Float)
     preco_venda = Column(Float)
-    estoque_atual = Column(Integer)
-    estoque_minimo = Column(Integer) # Usado para alertas de reposição
+    quantidade_estoque = Column(Integer, default=0)
+    estoque_minimo = Column(Integer, default=5) # Usado para alertas de reposição
     ativo = Column(Boolean, default=True)
 
 # Plano de Contas Hierárquico exigido para Contabilidade (RF04/Anexo 1)
@@ -61,7 +61,6 @@ class Financeiro(Base):
     valor = Column(Float)
     status = Column(String, default="Pendente") # Pago ou Pendente
     data_vencimento = Column(DateTime)
-    # Vinculo com o Plano de Contas para o Balanço Patrimonial futuro
     id_plano_contas = Column(Integer, ForeignKey("plano_contas.id"))
     entidade_id = Column(Integer, ForeignKey("entidades.id"))
 
@@ -83,6 +82,16 @@ class ItemCompra(Base):
     quantidade = Column(Integer)
     preco_unitario = Column(Float)
     pedido = relationship("PedidoCompra", back_populates="itens")
+
+#Tabelas de vendas sprint 3
+class Venda(Base):
+    __tablename__ = "vendas"
+    id = Column(Integer, primary_key=True)
+    id_cliente = Column(Integer, ForeignKey("entidades.id"))
+    id_produto = Column(Integer, ForeignKey("produtos.id"))
+    quantidade = Column(Integer)
+    valor_total = Column(Float)
+    data_venda = Column(DateTime, default=datetime.datetime.utcnow)
 
 # Rastro de Auditoria: Log de Movimentações (RF11)
 class EstoqueLog(Base):

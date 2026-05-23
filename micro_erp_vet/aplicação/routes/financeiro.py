@@ -8,9 +8,20 @@ router = APIRouter(prefix="/financeiro", tags=["Financeiro"])
 @router.get("/fluxo-caixa/")
 def obter_fluxo_caixa(db: Session = Depends(get_db)):
     # RF04: Demonstração de Entradas e Saídas
-    receitas = db.query(models.Financeiro).filter(models.Financeiro.tipo == 'RECEITA').all()
-    despesas = db.query(models.Financeiro).filter(models.Financeiro.tipo == 'DESPESA').all()
+    receitas = db.query(models.Financeiro).filter(models.Financeiro.tipo == 'Receber').all()
+    despesas = db.query(models.Financeiro).filter(models.Financeiro.tipo == 'Pagar').all()
     
     # Vínculo com Plano de Contas
-    total = sum(r.valor for r in receitas) - sum(d.valor for d in despesas)
-    return {"saldo_atual": total, "historico": receitas + despesas}
+    total_receber = sum(r.valor for r in receitas) 
+    total_pagar = sum(d.valor for d in despesas)
+    saldo = total_receber - total_pagar
+
+    return {
+        "saldo_projetado": saldo, 
+        "total_receber": total_receber,
+        "total_pagar": total_pagar,
+        "detalhes": {
+            "entradas": receitas,
+            "saidas": despesas
+        }
+    }

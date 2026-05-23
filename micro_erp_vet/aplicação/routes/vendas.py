@@ -16,12 +16,14 @@ def registrar_venda(venda: schemas.VendaCreate, db: Session = Depends(get_db)):
     # RF03: Baixa automática de estoque
     produto.quantidade_estoque -= venda.quantidade
     
-    nova_venda = models.Venda(**venda.dict())
+    nova_venda = models.Venda(
+        id_produto = venda.d-id_produto,
+        quantidade = venda.quantidade,
+        valor_total = venda.valor_total,
+        data_venda = date.today()  
+        )
     db.add(nova_venda)
-    db.commit()
-    return {"status": "Venda realizada e estoque atualizado"}
 
-    #automatização sprint 4
     novo_recebivel = models.Financeiro(
         tipo = "RECEBER",
         valor = venda_data.valor_total,
@@ -30,5 +32,18 @@ def registrar_venda(venda: schemas.VendaCreate, db: Session = Depends(get_db)):
         status = "ABERTO",
         id_plano_contas = 115 #ID dos Clientes no plano de contas
     )
+
     db.add(novo_recebivel)
-    db.commit()
+
+    try:
+        db.commit()
+        db.refresh(nova_venda)
+        return {
+            "status": "Venda realizada e estoque atualizado",
+            "estoque_restante": produto.quantidade_estoque,
+            "financeiro": "Título gerado no Contas a Receber"
+            }
+
+    except Exception as e:
+        db.rollback()
+        raise HTTPException (status_code = 500, detail = f"Erro ao processar venda: {str(e)}")    
